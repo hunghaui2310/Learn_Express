@@ -1,0 +1,11 @@
+extends ../layouts/common
+block content
+
+    each product in products
+        .product
+            .img-pro
+                img(src=product.image, alt='')
+            .content
+                h3= product.name
+                p= product.description
+                a.btn.btn-primary(href="/cart/add/" + product.id) Add To Cart
