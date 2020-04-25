@@ -1,8 +1,8 @@
 // var db = require('../db');
 const shortid = require('shortid');
-var Product = require('../models/product.model');
+var Product = require('../../models/product.model');
 
-module.exports.index = async function (req, res, next) {
+module.exports.index = async function (req, res) {
     // var page = parseInt(req.query.page) || 1;
     // var perPage = 8;
     // var start = (page - 1) * perPage;
@@ -11,12 +11,12 @@ module.exports.index = async function (req, res, next) {
     //     products: db.get('products').value().slice(start, end)
     // });
 
-    try {
-        var products = await Product.find();
-        res.render('products/index', {
-            products: products
-        })
-    }catch (e) {
-        next(e);
-    }
+    var products = await Product.find();
+    res.json(products);
 };
+
+module.exports.create = async function (req, res) {
+    var product = Product.create(req.body);
+    res.json(product);
+}
+
